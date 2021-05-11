@@ -1,0 +1,57 @@
+.maincontaire {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("./800px_COLOURBOX1510681.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.loginbox {
+  height: 400px;
+  width: 400px;
+  margin: 80px auto;
+  border: 1px solid rgba(56, 2, 2, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2);
+  background-color: rgba(56, 2, 2, 0.2);
+}
+
+.loginform {
+  text-align: center;
+  margin: 80px 0;
+}
+
+.email {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: none;
+  border-bottom: 2px solid red;
+}
+.password {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: none;
+  border-bottom: 2px solid red;
+}
+.loginbutton {
+  background-color: whitesmoke;
+  width: 30%;
+  color: black;
+  padding: 12px;
+  margin: 10px 0px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+.container {
+  font-size: 20px;
+  margin: 10px;
+}
+.validationError {
+  color: red;
+}

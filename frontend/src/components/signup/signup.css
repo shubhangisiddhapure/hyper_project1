@@ -1,0 +1,58 @@
+.mainbox {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("./photo-1544620347-c4fd4a3d5957.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+.singupbox {
+  height: 800px;
+  width: 500px;
+  margin-top: 100px;
+  margin-left: 1100px;
+  border-radius: 2px;
+  background-color: #5177a0bd;
+}
+.singupform {
+  text-align: center;
+  margin: 80px 0px;
+  padding: 30px 30px;
+}
+.singuprow {
+  padding: 30px;
+  height: 45px;
+  width: 400px;
+}
+
+.fromrows {
+  padding: 15px;
+  height: 270px;
+  width: 400px;
+}
+
+.singupinfo {
+  padding: 15px;
+  width: 380px;
+  margin-bottom: 30px;
+  background-color: white(198, 203, 207);
+}
+.signupbutton {
+  background-color: white(53, 152, 220);
+  width: 30%;
+  color: black;
+  margin: 10px 0px;
+  padding: 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 25px;
+  font-size: 15px;
+}
+.linkcontainer {
+  font-size: 20px;
+}
+.errorMsg {
+  color: red;
+}
