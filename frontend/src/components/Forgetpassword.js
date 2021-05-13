@@ -1,13 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Forgetpassword extends Component {
-  render() {
-    return (
-      <div>
-        <h1>SSM</h1>
-      </div>
-    );
-  }
+function Forgetpassword() {
+  return <div></div>;
 }
-
 export default Forgetpassword;
