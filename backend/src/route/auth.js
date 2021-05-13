@@ -163,7 +163,7 @@ router.post(
     }
   }
 );
-//new password
+//new password API
 router.post(
   "/newPassword",
   [

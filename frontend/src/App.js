@@ -5,7 +5,7 @@ import "./App.css";
 import Login from "./components/login/Login";
 import Homepage from "./components/Homepage";
 import Signup from "./components/signup/Signup";
-import Forgetpassword from "./components/Forgetpassword";
+import Forgetpassword from "./components/forgetpassword/Forgetpassword";
 
 function App() {
   return (
