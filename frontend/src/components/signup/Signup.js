@@ -136,9 +136,7 @@ class Signup extends Component {
         }
       }
     } catch (error) {
-      if (error.response.status === 400) {
-        alert("User alreay exist !");
-      }
+      this.setState({ error: "User alreay exist !" });
     }
   }
   render() {

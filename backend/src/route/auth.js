@@ -3,7 +3,10 @@ const User = require("../model/user.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
-const config = require("../config/config.json");
+const process = require("process");
+const jwtToken = process.env.JWTSECRET;
+const apiKey = process.env.SENDGRIDSECRT;
+
 const validation = require("../validation/uservalidation.js");
 const uservalidation = validation.userValidation;
 const { check, validationResult } = require("express-validator/check");
@@ -14,8 +17,7 @@ const sendgridTransort = require("nodemailer-sendgrid-transport");
 const transporter = nodemailer.createTransport(
   sendgridTransort({
     auth: {
-      api_key:
-        "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"
+      api_key: apiKey
     }
   })
 );
@@ -53,7 +55,7 @@ router.post("/signup", async (req, res) => {
         id: user.id
       }
     };
-    jwt.sign(payload, config.jwtSecret, { expiresIn: 360000 }, (err, token) => {
+    jwt.sign(payload, jwtToken, { expiresIn: 360000 }, (err, token) => {
       if (err) throw err;
       res.json({ token });
     });
@@ -97,15 +99,10 @@ router.post("/signup", async (req, res) => {
             id: user.id
           }
         };
-        jwt.sign(
-          payload,
-          config.jwtSecret,
-          { expiresIn: 360000 },
-          (err, token) => {
-            if (err) throw err;
-            res.json({ token });
-          }
-        );
+        jwt.sign(payload, jwtToken, { expiresIn: 360000 }, (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        });
       } catch (err) {
         console.log(err);
         res.status(500).send("server error");
@@ -121,7 +118,7 @@ router.post(
       .not()
       .isEmpty()
   ],
-  (req, res) => {
+  async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors });
@@ -146,7 +143,7 @@ router.post(
         if (result) {
           transporter.sendMail({
             to: user.email,
-            from: "shubhangis20@navgurukul.org",
+            from: "siddhapureshubhangi@gmail.com",
             subject: "Password Reset",
             html: `
             <p> you requested for password reset</p>
