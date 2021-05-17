@@ -16,7 +16,7 @@ function App() {
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/homepage" component={Homepage} />
           <Route exact path="/frogetpassword" component={Reset} />
-          <Route exact path="/reset/:token" component={Newpassword} />
+          <Route exact path="/:token" component={Newpassword} />
         </Switch>
       </Router>
     </div>

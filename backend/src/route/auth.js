@@ -147,12 +147,11 @@ router.post(
             subject: "Password Reset",
             html: `
             <p> you requested for password reset</p>
-            <h5>click on this <a href = "http://localhost:3000/reset/${token}">link</a> to reset the password
+            <h5>click on this <a href = "http://localhost:3000/${token}">link</a> to reset the password
             `
           });
           res.json({ messege: "check your email", token });
-          // res.send(token);
-        }
+      }
       });
     } catch (err) {
       console.log(err);

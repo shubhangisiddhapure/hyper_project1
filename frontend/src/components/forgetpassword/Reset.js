@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+// import useEnterKeyListener from "./hooks/useEnterKeyListener";
 import "./reset.css";
-
 const Reset = () => {
+  const [sucess, setsucess] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState(false);
   const Postdata = async () => {
@@ -19,7 +20,7 @@ const Reset = () => {
       const resp = await axios.post("api/resetPassword", { email });
       let data = resp.data;
       if (data) {
-        alert("Please Check your email to reset password");
+        setsucess("Please Check your email to reset password");
         return true;
       }
     } catch (error) {
@@ -44,6 +45,7 @@ const Reset = () => {
           onChange={e => setEmail(e.target.value)}
         />{" "}
         {error && <div style={{ color: `red` }}>Invalid Email</div>}
+        {sucess && <div>{sucess}</div>}
         <div className="resetcontainer">
           We'll never share your email with anyone else
         </div>
