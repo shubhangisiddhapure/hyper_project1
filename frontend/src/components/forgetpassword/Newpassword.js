@@ -10,7 +10,7 @@ const Newpassword = () => {
   const { token } = useParams();
   const data = async () => {
     try {
-      if (password.length === 0 && confrimPassword.length === 0) {
+      if (password.length === 0 || confrimPassword.length === 0) {
         setError("Please fill all the fields");
         return false;
       }

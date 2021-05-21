@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-// import useEnterKeyListener from "./hooks/useEnterKeyListener";
+
 import "./reset.css";
 const Reset = () => {
   const [sucess, setsucess] = useState("");
@@ -29,6 +29,7 @@ const Reset = () => {
   };
   return (
     <div className="resetpage">
+      {sucess && <span>{sucess}</span>}
       <div className="resetbox">
         <h2>Reset Password</h2>
         <div className="resetcontainer">
@@ -45,7 +46,6 @@ const Reset = () => {
           onChange={e => setEmail(e.target.value)}
         />{" "}
         {error && <div style={{ color: `red` }}>Invalid Email</div>}
-        {sucess && <div>{sucess}</div>}
         <div className="resetcontainer">
           We'll never share your email with anyone else
         </div>

@@ -20,11 +20,6 @@
   margin: 80px 0px;
   padding: 30px 30px;
 }
-.singuprow {
-  padding: 30px;
-  height: 45px;
-  width: 400px;
-}
 
 .fromrows {
   padding: 15px;
@@ -33,13 +28,14 @@
 }
 
 .singupinfo {
-  padding: 15px;
+  padding: 10px;
   width: 380px;
   margin-bottom: 30px;
   background-color: white(198, 203, 207);
 }
 .singdrop {
-  width: 413px;
+  width: 380px;
+  margin-left: 60px;
   margin-bottom: 30px;
   background-color: white(198, 203, 207);
 }

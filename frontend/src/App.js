@@ -3,7 +3,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Login from "./components/login/Login";
-import Homepage from "./components/Homepage";
+import Homepage from "./components/bussearch/Homepage";
 import Signup from "./components/signup/Signup";
 import Reset from "./components/forgetpassword/Reset";
 import Newpassword from "./components/forgetpassword/Newpassword";

@@ -64,7 +64,7 @@ class Login extends Component {
     return (
       <div className="maincontaire">
         <div className="loginbox">
-          <div className="loginfrom">
+          <div>
             <h2>Welcome to Shree Services</h2>
             <p>
               <b>Log-In Here</b>
@@ -86,6 +86,7 @@ class Login extends Component {
                 this.setState({ password: e.target.value });
               }}
             />
+            <br></br>
             {this.state.error === true ? (
               <span className="validationError">
                 Please fill all the fields.

@@ -30,7 +30,6 @@ class Signup extends Component {
   }
   handleChange = gender => {
     this.setState({ gender });
-    // console.log("Option selected:", selectedGender);
   };
   isAnyFieldEmpty = () => {
     const userName = this.state.name;
