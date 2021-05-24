@@ -1,9 +1,7 @@
 .jumbotron {
-  margin-top: 20%;
+  margin-top: 8%;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-image: no-repeat;
 }
 .Navbar {
   margin-bottom: 200px;
@@ -11,3 +9,13 @@
   margin-left: 0;
   margin-right: 100%;
 }
+form {
+  background-image: url("https://console.kr-asia.com/wp-content/uploads/2020/09/fahad-bin-kamal-anik-GlDRYsruYJ8-unsplash-scaled.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+/* .carddata {
+  display: flex;
+} */

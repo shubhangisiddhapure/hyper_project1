@@ -1,7 +1,18 @@
 import React, { useState } from "react";
 import "./home.css";
+import axios from "axios";
 import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
+import {
+  Card,
+  CardColumns,
   Jumbotron,
+  CardDeck,
   Row,
   Col,
   Container,
@@ -15,13 +26,16 @@ import {
   DropdownButton
 } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { alignPropType } from "react-bootstrap/esm/DropdownMenu";
 const Homepage = () => {
   const history = useHistory();
   const [endCity, setEndcity] = useState("");
   const [startCity, setStartcity] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [error, setError] = useState("");
-  const Postdata = async () => {
+  const [searchResults, setsearchResults] = useState("");
+  const postData = async () => {
+    console.log("endCity");
     try {
       if (
         endCity.length === 0 ||
@@ -31,10 +45,24 @@ const Homepage = () => {
         setError("Please fill all the fields");
         return false;
       }
+      const resp = await axios.post("api/busSearch", {
+        endCity,
+        startCity,
+        departureDate
+      });
+      if (resp) {
+        const data = resp.data;
+        const busData = data.buses;
+        setsearchResults(busData);
+        setError("");
+        return true;
+      }
     } catch (error) {
+      setError("Bus not available");
       console.log(error);
     }
   };
+
   return (
     <div>
       <Container>
@@ -53,17 +81,23 @@ const Homepage = () => {
             height="55"
             className="mr-auto"
           />
+          <h5>
+            <Link exact to="/">
+              <p style={{ color: "white" }}>Logout</p>
+            </Link>
+          </h5>
         </Navbar>
       </Container>
       <Form>
         <Container>
-          <div className="jumbotron">
+          <div className="jumbotron" style={{ backgroundColor: "transparent" }}>
             <Form.Row className="rows">
               <Form.Group as={Col} controlId="formGridCity">
                 <Form.Control
                   type="text"
                   name="startCity"
                   placeholder="Enter StartCity"
+                  autoComplete="off"
                   value={startCity}
                   onChange={e => setStartcity(e.target.value)}
                 />
@@ -72,6 +106,7 @@ const Homepage = () => {
                 <Form.Control
                   type="text"
                   name="ednCity"
+                  autoComplete="off"
                   placeholder="Enter EndCity"
                   value={endCity}
                   onChange={e => setEndcity(e.target.value)}
@@ -81,17 +116,49 @@ const Homepage = () => {
                 <Form.Control
                   type="date"
                   name="date"
+                  autoComplete="off"
                   value={departureDate}
                   onChange={e => setDepartureDate(e.target.value)}
                 />
               </Form.Group>
             </Form.Row>
-            <Button variant="primary" type="submit" onClick={() => Postdata()}>
+            {error && <div style={{ color: `red` }}>{error}</div>}
+            <Button variant="primary" type="button" onClick={() => postData()}>
               Search
             </Button>
           </div>
         </Container>
       </Form>
+      {searchResults &&
+        searchResults.map((bus, index) => {
+          const journeyDate = new Date(bus.departureDate).toDateString();
+          return (
+            <Card
+              border="success"
+              style={{
+                width: "100%"
+              }}
+            >
+              <CardColumns>
+                {
+                  <Card.Img
+                    variant="top"
+                    src="http://cdn.cnn.com/cnnnext/dam/assets/200826183306-adventures-overlandimage-from-ios.jpg"
+                  />
+                }
+                <Card.Title>Bus{index + 1}</Card.Title>
+                <Card.Body>
+                  <p>BusName:{bus.name}</p>
+                  <p>Bus.Number:{bus.busNumber}</p>
+                  <p> From:{bus.startCity}</p>
+                  <p> To:{bus.endCity}</p>
+                  <p>DepartureDate: {journeyDate}</p>
+                  <Button variant="primary">Select</Button>
+                </Card.Body>
+              </CardColumns>
+            </Card>
+          );
+        })}
     </div>
   );
 };

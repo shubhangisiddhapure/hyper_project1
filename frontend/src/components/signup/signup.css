@@ -21,10 +21,8 @@
   padding: 30px 30px;
 }
 
-.fromrows {
-  padding: 15px;
-  height: 270px;
-  width: 400px;
+.singuprow {
+  margin-top: 40px;
 }
 
 .singupinfo {
