@@ -16,6 +16,13 @@ form {
   background-size: cover;
   height: 100%;
 }
-/* .carddata {
+
+.carddata {
   display: flex;
-} */
+}
+.rowdata {
+  margin-right: 15%;
+}
+.cardbutton {
+  margin-top: 21%;
+}

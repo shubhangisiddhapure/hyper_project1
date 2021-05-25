@@ -1,32 +1,24 @@
 import React, { useState } from "react";
 import "./home.css";
+import Cards from "./Cards";
+import Selectseat from "./Selectseat";
 import axios from "axios";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect
-} from "react-router-dom";
+import Navbars from "./Navbars";
 import {
   Card,
   CardColumns,
   Jumbotron,
   CardDeck,
   Row,
+  CardGroup,
   Col,
   Container,
-  Navbar,
-  Nav,
   Form,
   Dropdown,
-  Button,
-  InputGroup,
-  FormControl,
-  DropdownButton
+  Button
 } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import { alignPropType } from "react-bootstrap/esm/DropdownMenu";
+
 const Homepage = () => {
   const history = useHistory();
   const [endCity, setEndcity] = useState("");
@@ -34,6 +26,7 @@ const Homepage = () => {
   const [departureDate, setDepartureDate] = useState("");
   const [error, setError] = useState("");
   const [searchResults, setsearchResults] = useState("");
+  const [seatsData, setseatsData] = useState("");
   const postData = async () => {
     console.log("endCity");
     try {
@@ -58,35 +51,17 @@ const Homepage = () => {
         return true;
       }
     } catch (error) {
-      setError("Bus not available");
+      setError(true);
       console.log(error);
     }
   };
-
+  const seatData = () => {
+    setseatsData(true);
+  };
   return (
     <div>
       <Container>
-        <Navbar
-          expand="lg"
-          fixed="top"
-          bg="primary"
-          variant="dark"
-          classname="Navbar"
-          style={{ width: "100%", height: "10%" }}
-        >
-          <img
-            alt=""
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3G82LYc9STO2TjyhFF_5dfoLqEo7MqSM51A&usqp=CAU"
-            width="100"
-            height="55"
-            className="mr-auto"
-          />
-          <h5>
-            <Link exact to="/">
-              <p style={{ color: "white" }}>Logout</p>
-            </Link>
-          </h5>
-        </Navbar>
+        <Navbars />
       </Container>
       <Form>
         <Container>
@@ -129,11 +104,17 @@ const Homepage = () => {
           </div>
         </Container>
       </Form>
+      {error == true && (
+        <div style={{ color: `red` }}>
+          <Cards />
+        </div>
+      )}
       {searchResults &&
         searchResults.map((bus, index) => {
           const journeyDate = new Date(bus.departureDate).toDateString();
           return (
             <Card
+              className="shadow p-3 mb-5 bg-white rounded"
               border="success"
               style={{
                 width: "100%"
@@ -146,19 +127,60 @@ const Homepage = () => {
                     src="http://cdn.cnn.com/cnnnext/dam/assets/200826183306-adventures-overlandimage-from-ios.jpg"
                   />
                 }
-                <Card.Title>Bus{index + 1}</Card.Title>
-                <Card.Body>
-                  <p>BusName:{bus.name}</p>
-                  <p>Bus.Number:{bus.busNumber}</p>
-                  <p> From:{bus.startCity}</p>
-                  <p> To:{bus.endCity}</p>
-                  <p>DepartureDate: {journeyDate}</p>
-                  <Button variant="primary">Select</Button>
+                <Card.Title className="col d-flex justify-content-center">
+                  Bus{index + 1}
+                </Card.Title>
+                <br></br>
+                <Card.Body className="carddata">
+                  <div className="rowdata">
+                    <h5>BusName</h5>
+                    {bus.name}
+                  </div>
+                  <div className="rowdata">
+                    <h5>BusType</h5>
+                    {bus.description}
+                  </div>
+                  <div className="rowdata">
+                    <h5>BusNumber</h5>
+                    {bus.busNumber}
+                  </div>{" "}
+                  <div className="rowdata">
+                    <h5>From</h5>
+                    {bus.startCity}
+                  </div>
+                  <div className="rowdata">
+                    <h5> To</h5>
+                    {bus.endCity}
+                  </div>
+                  <div className="rowdata">
+                    <h5>DepartureDate</h5> {journeyDate}
+                  </div>
+                  <div className="rowdata">
+                    <h5>Seats</h5> {bus.numberOfseats}
+                  </div>
+                  <div className="rowdata">
+                    <h5>Fare</h5>
+                    {bus.costOfticket}
+                  </div>
                 </Card.Body>
+                <Button
+                  variant="primary"
+                  size="lg"
+                  type="button"
+                  onClick={() => seatData()}
+                  className="cardbutton"
+                >
+                  VIEW SEATS
+                </Button>
               </CardColumns>
             </Card>
           );
         })}
+      {seatsData && (
+        <div>
+          <Selectseat></Selectseat>
+        </div>
+      )}
     </div>
   );
 };

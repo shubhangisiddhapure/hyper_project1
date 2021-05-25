@@ -40,12 +40,10 @@ router.put(
         // checking the seat number is duplicate or not
         if (seat.includes(newUser.data[i].seatNo)) {
           const duplicateSeatNo = newUser.data[i].seatNo;
-          return res
-            .status(400)
-            .json({
-              msg: "Entered seat is dupalicate,choose another seat",
-              duplicateSeatNo
-            });
+          return res.status(400).json({
+            msg: "Entered seat is dupalicate,choose another seat",
+            duplicateSeatNo
+          });
         } else {
           seat.push(newUser.data[i].seatNo);
           // if(seat[i]<1 || seat[i]>businformation.length)
@@ -68,12 +66,10 @@ router.put(
           .json({ msg: "Entered seat number is inavlid", invalidSeatno });
       }
       if (bookedSeatlist.length !== 0) {
-        return res
-          .status(400)
-          .json({
-            msg: "This seats are booked,choose another seats",
-            bookedSeatlist
-          });
+        return res.status(400).json({
+          msg: "This seats are booked,choose another seats",
+          bookedSeatlist
+        });
       }
       let userData = await User.findById(req.user.id);
       if (userData) {
@@ -95,13 +91,10 @@ router.put(
               passenger: passengers
             };
             if (selectedSeat.includes(seat[i])) {
-              return res
-                .status(400)
-                .json({
-                  msg:
-                    "You can not book this seat,some one else using this seat",
-                  selectedSeat
-                });
+              return res.status(400).json({
+                msg: "You can not book this seat,some one else using this seat",
+                selectedSeat
+              });
             } else {
               selectedSeat.push(seat[i]);
             }
@@ -126,13 +119,10 @@ router.put(
               passenger
             };
             if (selectedSeat.includes(seat[i])) {
-              return res
-                .status(400)
-                .json({
-                  msg:
-                    "we can not book this seat,some one else using this seat",
-                  selectedSeat
-                });
+              return res.status(400).json({
+                msg: "we can not book this seat,some one else using this seat",
+                selectedSeat
+              });
             } else {
               selectedSeat.push(seat[i]);
             }
