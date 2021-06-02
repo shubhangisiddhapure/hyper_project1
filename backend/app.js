@@ -13,7 +13,7 @@ app.use((req, res, next) => {
   );
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Content-Type, Authorization, Accept"
+    "Content-Type, x-auth-token, Accept"
   );
   next();
 });

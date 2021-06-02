@@ -152,9 +152,9 @@ router.put(
 );
 
 // get list of all closed tickets
-router.get("/closed/:busId", async (req, res) => {
+router.post("/closed", async (req, res) => {
   try {
-    const busId = req.params.busId;
+    const busId = req.body.busId;
     let bus = await Bus.findById(busId);
     if (!bus) {
       return res.status(404).json({ msg: "Bus not exist" });
@@ -170,9 +170,9 @@ router.get("/closed/:busId", async (req, res) => {
   }
 }),
   // get list of all open tickets
-  router.get("/open/:busId", async (req, res) => {
+  router.post("/open", async (req, res) => {
     try {
-      const busId = req.params.busId;
+      const busId = req.body.busId;
       const bus = await Bus.findById(busId);
       if (!bus) {
         return res.status(404).json({ msg: "Bus not exist" });

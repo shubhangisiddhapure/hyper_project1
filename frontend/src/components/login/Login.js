@@ -35,7 +35,6 @@ class Login extends Component {
   };
   islogin() {
     if (this.isFormValid() === true) {
-      console.log("state", this.state);
       fetch("http://localhost:7900/api/login", {
         method: "POST",
         headers: {
@@ -44,8 +43,7 @@ class Login extends Component {
         body: JSON.stringify(this.state)
       }).then(result => {
         result.json().then(resp => {
-          console.log(resp.token);
-          localStorage.setItem("login", JSON.stringify(resp.token));
+          localStorage.setItem("login", resp.token);
           if (!resp.token) {
             console.log("Invalid input");
             return this.setState({ tokenError: true });
