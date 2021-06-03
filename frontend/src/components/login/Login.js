@@ -44,6 +44,7 @@ class Login extends Component {
       }).then(result => {
         result.json().then(resp => {
           localStorage.setItem("login", resp.token);
+          localStorage.setItem("email", this.state.email);
           if (!resp.token) {
             console.log("Invalid input");
             return this.setState({ tokenError: true });

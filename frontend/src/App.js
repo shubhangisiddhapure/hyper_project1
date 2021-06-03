@@ -7,6 +7,7 @@ import Homepage from "./components/bussearch/Homepage";
 import Signup from "./components/signup/Signup";
 import Reset from "./components/forgetpassword/Reset";
 import Newpassword from "./components/forgetpassword/Newpassword";
+import Ticketdetail from "./components/bussearch/Ticketdetail";
 function App() {
   return (
     <div className="App">
@@ -16,6 +17,7 @@ function App() {
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/homepage" component={Homepage} />
           <Route exact path="/frogetpassword" component={Reset} />
+          <Route exact path="/ticketdetail" component={Ticketdetail} />
           <Route exact path="/:token" component={Newpassword} />
         </Switch>
       </Router>

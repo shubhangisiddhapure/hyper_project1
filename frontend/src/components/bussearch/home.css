@@ -37,3 +37,17 @@ form {
 .active {
   border: 5px solid green;
 }
+.divbody {
+  border: None;
+  width: 100%;
+  background-color: gainsboro;
+  padding: 3%;
+  display: flex;
+}
+.bookingdata {
+  padding: 4%;
+}
+.data {
+  padding: 2%;
+  border-radius: 4px;
+}

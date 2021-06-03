@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, withRouter } from "react-router-dom";
 import axios from "axios";
 import "./newpassword.css";
 const Newpassword = () => {
@@ -64,4 +64,4 @@ const Newpassword = () => {
     </div>
   );
 };
-export default Newpassword;
+export default withRouter(Newpassword);

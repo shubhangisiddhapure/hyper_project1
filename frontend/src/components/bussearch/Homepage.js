@@ -14,7 +14,6 @@ import {
   Form,
   Button
 } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
 const cities = [
   { label: "pune", value: "pune" },
   { label: "Nanded", value: "nanded" },
@@ -28,7 +27,6 @@ const cities = [
 ];
 
 const Homepage = () => {
-  const history = useHistory();
   const list = [];
   const seatInfo = [];
   const closedSeatlist = [];
@@ -216,7 +214,6 @@ const Homepage = () => {
                         seatCardOn={seatsData}
                         busDetail={searchResults}
                         seatdetail={seatInformation}
-                        bookedseats={closedSeat}
                       ></Selectseat>
                     </div>
                   ) : null}
