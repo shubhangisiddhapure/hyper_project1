@@ -103,7 +103,6 @@ const Selectseat = props => {
       }
     );
     if (response) {
-      const ticketInfo = response.data.ticketList;
       props.history.push({
         pathname: "/ticketdetail",
         state: { detail: response.data.ticketList }
@@ -118,12 +117,12 @@ const Selectseat = props => {
           <Card
             border="Primary"
             style={{
-              width: "60%"
+              width: "60%",
             }}
           >
             <div
               style={{
-                display: "flex"
+                display: "flex",
               }}
             >
               <div>
@@ -131,7 +130,7 @@ const Selectseat = props => {
                   src="https://static.thenounproject.com/png/790455-200.png"
                   style={{
                     marginTop: "200%",
-                    width: "150%"
+                    width: "150%",
                   }}
                 />
               </div>
@@ -150,17 +149,18 @@ const Selectseat = props => {
                   autoComplete="off"
                   name="name"
                   value={name}
-                  onChange={e => setname(e.target.value)}
+                  onChange={(e) => setname(e.target.value)}
                 />
               </div>
               <div className="bookingdata">
                 <Select
+                  className="selectbox"
                   type="text"
                   placeholder="Gender"
                   autoComplete="off"
                   name="gender"
                   options={Gender}
-                  onChange={e => setgender(e.value)}
+                  onChange={(e) => setgender(e.value)}
                 />
               </div>{" "}
               <div className="bookingdata">
@@ -171,7 +171,7 @@ const Selectseat = props => {
                   autoComplete="off"
                   placeholder="Enter the phone No"
                   value={phoneNo}
-                  onChange={e => setphoneNo(e.target.value)}
+                  onChange={(e) => setphoneNo(e.target.value)}
                 />
               </div>
               <div>Email</div>
@@ -203,7 +203,7 @@ const Selectseat = props => {
                       placeholder="Enter email"
                       autoComplete="off"
                       value={email}
-                      onChange={e => setEmail(e.target.value)}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                 )}

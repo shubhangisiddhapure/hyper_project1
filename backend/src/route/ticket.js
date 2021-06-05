@@ -4,8 +4,19 @@ const Bus = require("../model/Bus.js");
 const User = require("../model/user.js");
 const auth = require("../middleware/auth.js");
 const { body } = require("express-validator");
-
+const nodemailer = require("nodemailer");
+const sendgridTransort = require("nodemailer-sendgrid-transport");
+const process = require("process");
+const apiKey = process.env.SENDGRIDSECRT;
 const router = express.Router();
+const transporter = nodemailer.createTransport(
+  sendgridTransort({
+    auth: {
+      api_key: apiKey,
+    },
+  })
+);
+
 //Book the ticket
 const selectedSeat = [];
 router.put(
@@ -137,6 +148,77 @@ router.put(
             seatNo: newUser.data[i].seatNo
           }).populate("busId", []);
           ticketList.push(bookedticket);
+          if (ticketList) {
+             transporter.sendMail({
+               to: newData.email,
+               from: "siddhapureshubhangi@gmail.com",
+               subject: "Ticket Detail",
+               html: `
+            <p>Hello</p>
+            <p>Thanks for using app,Happy journey. </p>
+            <p> Your Ticket Detail </p>
+            <div> 
+              <Card className="container p-5">
+              <Table bordered size="sm">
+                <tbody>
+                  <tr>
+                    <td colSpan="2">
+                      <b> From </b>${ticketList[0].busId.startCity}
+                    </td>
+                  </tr>
+                   <tr>
+                    <td colSpan="2">
+                     <b> to </b> ${ticketList[0].busId.endCity}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><b> Date of journey</b> </td>
+                    <td>${new Date(
+                      ticketList[0].busId.arrivalDate
+                    ).toDateString()}</td>
+                  </tr>
+                  <tr>
+                    <td><b>Bus Name and Type</b></td>
+                    <td>${ticketList[0].busId.name} Bus(${
+                 ticketList[0].busId.description
+               })</td>
+                  </tr>
+                  <tr>
+                    <td><b>Passenger Name</b></td>
+                    <td>${ticketList[0].passenger.name} </td>
+                  </tr>
+                  <tr>
+                    <td><b>Phone Number</b></td>
+                    <td>${ticketList[0].passenger.phoneNo} </td>
+                  </tr>
+                  <tr>
+                    <td><b>Seat Number</b></td>
+                    <td>${ticketList[0].seatNo} </td>
+                  </tr>
+                  <tr>
+                    <td><b>Total Fare</b></td>
+                    <td>${ticketList[0].busId.costOfticket} </td>
+                  </tr>
+                  <tr>
+                    <td><b>Bus Number</b></td>
+                    <td>${ticketList[0].busId.busNumber} </td>
+                  </tr>
+                  <tr>
+                    <td><b>Departure Timing</b></td>
+                    <td>${new Date(
+                      ticketList[0].busId.departureTiming
+                    ).toLocaleString("en-US", {
+                      hour: "numeric",
+                      hour12: true,
+                    })} </td>
+                  </tr>
+                </tbody>
+              </Table>
+            </Card>
+              </div>
+            `,
+             });  
+          }
         }
         return res.status(200).json({ msg: "Ticket Booked", ticketList });
       } else {

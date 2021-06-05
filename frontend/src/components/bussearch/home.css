@@ -45,9 +45,19 @@ form {
   display: flex;
 }
 .bookingdata {
-  padding: 4%;
+  padding: 2%;
 }
 .data {
   padding: 2%;
   border-radius: 4px;
+}
+.selectbox{
+  width: 108%;
+}
+span{
+  margin-right:15% ;
+}
+.Ticketpage{
+  background-color: rosybrown;
+  height: 100vh;
 }
