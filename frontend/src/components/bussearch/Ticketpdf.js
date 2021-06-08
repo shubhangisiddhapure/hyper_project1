@@ -2,16 +2,13 @@
 
 import React from "react";
 import jsPDF from "jspdf";
-import Ticketdetail from "./Ticketdetail";
 import "jspdf-autotable";
 
-import { Card, Table, Container } from "react-bootstrap";
 const Ticketpdf = (props) => {
-    const ticketInfo = props.bookedTicket;
-    console.log(ticketInfo);
-  
+  const ticketInfo = props.bookedTicket;
+  console.log(ticketInfo);
 
-    const exportPDF = () => {
+  const exportPDF = () => {
     const unit = "pt";
     const size = "A3"; // Use A1, A2, A3 or A4
     const orientation = "portrait"; // portrait or landscape
@@ -38,24 +35,23 @@ const Ticketpdf = (props) => {
       ticket.passenger[index].name,
       ticket.passenger[index].phoneNo,
       ticket.busId.costOfticket,
-   
     ]);
 
     let content = {
       startY: 50,
       head: [
         [
-        "From",
-        "To",
-        "ArrivalDate",
-        "BusName",
-        "BusType",
-        "BusNo",
-        "DepartureTiming",
-        "seatNo",
-        "Passenger Name",
-        "Passenger phoneNo",
-        "Total Fare"
+          "From",
+          "To",
+          "ArrivalDate",
+          "BusName",
+          "BusType",
+          "BusNo",
+          "DepartureTiming",
+          "seatNo",
+          "Passenger Name",
+          "Passenger phoneNo",
+          "Total Fare",
         ],
       ],
       body: data,
@@ -66,13 +62,13 @@ const Ticketpdf = (props) => {
     doc.save("ticket.pdf");
   };
 
-   {
+  {
     return (
       <div>
         <button onClick={() => exportPDF()}>Generate Pdf</button>
       </div>
     );
   }
-}
+};
 
 export default Ticketpdf;

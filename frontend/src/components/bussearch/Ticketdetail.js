@@ -1,9 +1,11 @@
+/** @format */
+
 import React, { useState } from "react";
 import Navbars from "./Navbars";
 import Ticketpdf from "./Ticketpdf";
 import { Card, Table, Container } from "react-bootstrap";
 import "./home.css";
-const Ticketdetail = props => {
+const Ticketdetail = (props) => {
   const ticketInfo = props.location.state.detail;
   return (
     <div className="contaire">
