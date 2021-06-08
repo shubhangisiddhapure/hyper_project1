@@ -31,6 +31,7 @@ const Selectseat = props => {
   const [email, setEmail] = useState("");
   const [chooseemail, setChooseemail] = useState("");
   const [seatSealcted, setseatsealcted] = useState("");
+  const [error, setError] = useState("");
   const displaySeats = props.seatdetail;
   const numberOfseats = props.busDetail[0].numberOfseats;
   const busId = props.busDetail[0]._id;
@@ -81,7 +82,6 @@ const Selectseat = props => {
   const handleChangePassemail = () => {
     setEmail(localStorage.getItem("email"));
   };
-  console.log(chooseemail);
   const data = [
     {
       seatNo: bookSeat,
@@ -93,23 +93,47 @@ const Selectseat = props => {
     }
   ];
   const fromSubmitHandler = async () => {
-    const response = await axios.put(
-      "api/book/" + busId,
-      { data },
-      {
-        headers: {
-          "x-auth-token": localStorage.getItem("login")
+    try {
+       if (name.length === 0 || gender.length === 0 || gender.length === 0) {
+         setError("Please fill all the fields");
+         return false;
+       }
+      var pattern = new RegExp(/^[0-9\b]+$/);
+      if (phoneNo.length === 10 && pattern.test(phoneNo)) {
+        var pattern = new RegExp(
+          /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+        );
+        if (!pattern.test(email)) {
+          setError("Please enter valid Email");
+          return false;
+        }
+        const response = await axios.put(
+          "api/book/" + busId,
+          { data },
+          {
+            headers: {
+              "x-auth-token": localStorage.getItem("login")
+            }
+          }
+        );
+        if (response) {
+          props.history.push({
+            pathname: "/ticketdetail",
+            state: { detail: response.data.ticketList }
+          });
+          return true;
         }
       }
-    );
-    if (response) {
-      props.history.push({
-        pathname: "/ticketdetail",
-        state: { detail: response.data.ticketList }
-      });
-      return true;
+      else {
+        setError("Please enter valid phone number"); 
+      }
     }
-  };
+    catch (err)
+    {
+     return false 
+    }
+  }
+    
   return (
     <div>
       <div className="divbody">
@@ -208,6 +232,7 @@ const Selectseat = props => {
                   </div>
                 )}
               </div>
+              {error && <div style={{ color: `red` }}>{error}</div>}
               <Button type="button" onClick={() => fromSubmitHandler()}>
                 Book
               </Button>

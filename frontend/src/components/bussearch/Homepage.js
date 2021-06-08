@@ -40,7 +40,6 @@ const Homepage = () => {
   const [avaliableSeat, setavaliableSeat] = useState("");
   const [closedSeat, setclosedSeat] = useState("");
   const postData = async () => {
-    console.log("endCity");
     try {
       if (
         endCity.length === 0 ||

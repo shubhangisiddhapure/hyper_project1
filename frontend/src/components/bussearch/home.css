@@ -58,6 +58,12 @@ span{
   margin-right:15% ;
 }
 .Ticketpage{
+  margin-top: 5%;
+}
+.contaire{
+  overflow: hidden;
   background-color: rosybrown;
-  height: 100vh;
+  background-size: cover;
+   height: 100vh;
+  width: 100%;
 }
