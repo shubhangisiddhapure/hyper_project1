@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { useHistory, withRouter } from "react-router-dom";
 import "./home.css";
-import { BrowserRouter as Router, Redirect } from "react-router-dom";
 import axios from "axios";
 import Select from "react-select";
 import {
